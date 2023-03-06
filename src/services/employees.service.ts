@@ -11,6 +11,11 @@ class EmployeeService {
     return allEmployee;
   }
 
+  public async findEmployeeByField(field: string, value: string): Promise<Employee[]> {
+    const allEmployee: Employee[] = await this.employees.findMany({ where: { [field]: value } });
+    return allEmployee;
+  }
+
   public async findEmployeeById(employeeId: string): Promise<Employee> {
     if (isEmpty(employeeId)) throw new HttpException(400, 'employeeId is empty');
 

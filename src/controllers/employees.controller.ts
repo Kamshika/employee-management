@@ -8,7 +8,12 @@ class EmployeesController {
 
   public getEmployees = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const findAllEmployeesData: Employee[] = await this.employeeService.findAllEmployee();
+      let findAllEmployeesData: Employee[];
+      if (req.query.field && req.query.value) {
+        findAllEmployeesData = await this.employeeService.findEmployeeByField(req.query.field as string, req.query.value as string);
+      } else {
+        findAllEmployeesData = await this.employeeService.findAllEmployee();
+      }
 
       res.status(200).json({ data: findAllEmployeesData, message: 'findAll' });
     } catch (error) {
