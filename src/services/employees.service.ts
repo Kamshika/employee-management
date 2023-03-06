@@ -1,5 +1,5 @@
 import { Employee, PrismaClient } from '@prisma/client';
-import { CreateEmployeeDto } from '@dtos/employees.dto';
+import { CreateEmployeeDto, EditEmployeeDto } from '@dtos/employees.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
 
@@ -30,7 +30,7 @@ class EmployeeService {
     return createEmployeeData;
   }
 
-  public async updateEmployee(employeeId: string, employeeData: CreateEmployeeDto): Promise<Employee> {
+  public async updateEmployee(employeeId: string, employeeData: EditEmployeeDto): Promise<Employee> {
     if (isEmpty(employeeData)) throw new HttpException(400, 'employeeData is empty');
 
     const findAllEmployee: Employee = await this.employees.findUnique({ where: { id: employeeId } });

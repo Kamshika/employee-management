@@ -20,15 +20,15 @@ model Employee {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
   fullName         String
   nameWithInitials String
-  displayName      String
-  designation      String
-  employeeType     String
-  experience       Float
-  gender           String
-  email            String   @unique
-  joinedDate       DateTime
-  salary           Float
-  dateOfBirth      DateTime
-  mobile           String
-  personalNotes    String
+  displayName      String?
+  designation      String?
+  employeeType     String?
+  experience       Float?
+  gender           String?
+  email            String?   @unique
+  joinedDate       DateTime?
+  salary           Float?
+  dateOfBirth      DateTime?
+  mobile           String?
+  personalNotes    String?
 }

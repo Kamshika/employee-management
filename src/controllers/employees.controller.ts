@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Employee } from '@prisma/client';
-import { CreateEmployeeDto } from '@dtos/employees.dto';
+import { CreateEmployeeDto, EditEmployeeDto } from '@dtos/employees.dto';
 import employeeService from '@services/employees.service';
 
 class EmployeesController {
@@ -41,7 +41,7 @@ class EmployeesController {
   public updateEmployee = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const employeeId = req.params.id;
-      const employeeData: CreateEmployeeDto = req.body;
+      const employeeData: EditEmployeeDto = req.body;
       const updateEmployeeData: Employee = await this.employeeService.updateEmployee(employeeId, employeeData);
 
       res.status(200).json({ data: updateEmployeeData, message: 'updated' });

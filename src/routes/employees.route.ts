@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import EmployeesController from '@controllers/employees.controller';
-import { CreateEmployeeDto } from '@dtos/employees.dto';
+import { CreateEmployeeDto, EditEmployeeDto } from '@dtos/employees.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
@@ -17,7 +17,7 @@ class EmployeesRoute implements Routes {
     this.router.get(`${this.path}`, this.employeesController.getEmployees);
     this.router.get(`${this.path}/:id`, this.employeesController.getEmployeeById);
     this.router.post(`${this.path}`, validationMiddleware(CreateEmployeeDto, 'body'), this.employeesController.createEmployee);
-    this.router.put(`${this.path}/:id`, validationMiddleware(CreateEmployeeDto, 'body', true), this.employeesController.updateEmployee);
+    this.router.put(`${this.path}/:id`, validationMiddleware(EditEmployeeDto, 'body', true), this.employeesController.updateEmployee);
     this.router.delete(`${this.path}/:id`, this.employeesController.deleteEmployee);
   }
 }
